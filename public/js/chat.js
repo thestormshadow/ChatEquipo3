@@ -199,10 +199,10 @@ $(function(){
 				icon: data.img
 				};
 				var notifchat = new Notification(data.user+" dice:", options);
-				notifchat.onclick = function () {
-					notifchat.close();
-					window.focus();					
-				};
+				//notifchat.onclick = function () {
+				//	notifchat.close();
+				//	window.focus();					
+				//};
 				setTimeout(function() { notifchat.close() }, 3000);
 			}			
 		}
