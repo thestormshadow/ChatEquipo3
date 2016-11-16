@@ -191,6 +191,7 @@ $(function(){
 				var notif = new Notification(data.user+" dice:", options);
 				notif.onclick = function () {
 					window.focus();
+					notif.close();
 				};
 				setTimeout(function() { notif.close() }, 3000);
 			}			
