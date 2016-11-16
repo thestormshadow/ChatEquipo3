@@ -184,7 +184,7 @@ $(function(){
 		if(data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			sendNotif(data.user, data.msg, data.img);
+			//sendNotif(data.user, data.msg, data.img);
 			
 		}
 	});
