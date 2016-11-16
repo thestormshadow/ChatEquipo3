@@ -169,12 +169,12 @@ $(function(){
 			
 			showMessage("somebodyLeft", data);
 			chats.empty();
-			var options = {
-					body: data.user+" ha salido ala sala de chat.",
-					icon: "img/logoNotifs.png"
-			};
-			var notif = new Notification("Notificación!", options);
-			setTimeout(function() { notif.close() }, 3000);
+			//var options = {
+			//		body: data.user+" ha salido ala sala de chat.",
+			//		icon: "img/logoNotifs.png"
+			//};
+			//var notif = new Notification("Notificación!", options);
+			//setTimeout(function() { notif.close() }, 3000);
 		}
 
 	});
@@ -194,16 +194,16 @@ $(function(){
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
 			if(window_focus == false){
-				//var options = {
-				//body: data.msg,
-				//icon: data.img
-				//};
-				//var notifchat = new Notification(data.user+" dice:", options);
-				//notifchat.onclick = function () {
-				//	notifchat.close();
-				//	window.focus();					
-				//};
-				//setTimeout(function() { notifchat.close() }, 3000);
+				var options = {
+				body: data.msg,
+				icon: data.img
+				};
+				var notifchat = new Notification(data.user+" dice:", options);
+				notifchat.onclick = function () {
+					notifchat.close();
+					window.focus();					
+				};
+				setTimeout(function() { notifchat.close() }, 3000);
 			}			
 		}
 	});
