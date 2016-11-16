@@ -87,7 +87,7 @@ $(function(){
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
-					setTimeout(function() { notif.close() }, 3000);
+					setTimeout(notif.close, 1000);
 					// call the server-side function 'login' and send user's parameters
 					socket.emit('login', {user: name, avatar: email, id: id});
 				}
@@ -126,7 +126,7 @@ $(function(){
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
-					setTimeout(function() { notif.close() }, 3000);
+					setTimeout(notif.close, 1000);
 				}
 
 			});
@@ -189,10 +189,9 @@ $(function(){
 				icon: data.img
 				};
 				var notif = new Notification(data.user+" dice:", options);
-				notif.onclick = function () {
-					notif.close();
-					window.focus();					
-				};
+				//notif.onclick = function () {
+				//	window.focus();
+				//};
 				setTimeout(function() { notif.close() }, 3000);
 			}			
 		}
