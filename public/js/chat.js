@@ -177,8 +177,7 @@ $(function(){
 		}
 	});
 	var notif;
-	socket.on('receive', function(data){
-		notif.close();
+	socket.on('receive', function(data){		
 		showMessage('chatStarted');
 
 		if(data.msg.trim().length) {
