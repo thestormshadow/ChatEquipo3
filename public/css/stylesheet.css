@@ -60,6 +60,8 @@ body {
 	height: 70px;
 	background-color: #3c4446;
 	margin-bottom: 200px;
+	position: fixed;
+	width: 100%;
 }
 
 .bannertext {
