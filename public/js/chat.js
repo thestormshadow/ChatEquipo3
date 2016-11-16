@@ -185,10 +185,10 @@ $(function(){
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
 			var options = {
-				body: msg,
-				icon: img
+				body: data.msg,
+				icon: data.img
 			};
-			var notif = new Notification(name+" dice:", options);
+			var notif = new Notification(data.user+" dice:", options);
 			setTimeout(notif.close, 3000);
 		}
 	});
