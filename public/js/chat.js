@@ -83,7 +83,7 @@ $(function(){
 
 					showMessage("inviteSomebody");
 					var options = {
-						body: "Hola! "+ name +" has entrado ala sala de chat",
+						body: "Hola! "+ name +" has entrado ala sala de chat, esperando compañero de chat...",
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
@@ -154,7 +154,12 @@ $(function(){
 
 				showMessage("heStartedChatWithNoMessages",data);
 			}
-
+			var options = {
+						body: "test",
+						icon: "img/logoNotifs.png"
+					};
+			var notif = new Notification("Información", options);
+			setTimeout(function() { notif.close() }, 3000);
 			chatNickname.text(friend);
 		}
 	});
