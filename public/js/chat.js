@@ -142,9 +142,8 @@ $(function(){
 
 	socket.on('startChat', function(data){
 		console.log(data);
-		
 		if(data.boolean && data.id == id) {
-			
+
 			chats.empty();
 
 			if(name === data.users[0]) {
@@ -155,7 +154,7 @@ $(function(){
 
 				showMessage("heStartedChatWithNoMessages",data);
 			}
-			
+
 			chatNickname.text(friend);
 		}
 	});
