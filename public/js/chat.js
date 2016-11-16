@@ -192,7 +192,7 @@ $(function(){
 				notification.onclick = function () {
 					window.focus();
 				};
-				setTimeout(function() { notif.close() }, 1000);
+				setTimeout(notif.close, 1000);
 			}			
 		}
 	});
