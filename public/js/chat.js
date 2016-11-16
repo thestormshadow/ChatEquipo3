@@ -87,7 +87,7 @@ $(function(){
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
-					setTimeout(notif.close, 3000);
+					setTimeout(notif.close, 1000);
 					// call the server-side function 'login' and send user's parameters
 					socket.emit('login', {user: name, avatar: email, id: id});
 				}
@@ -126,7 +126,7 @@ $(function(){
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
-					setTimeout(notif.close, 3000);
+					setTimeout(notif.close, 1000);
 				}
 
 			});
@@ -184,12 +184,15 @@ $(function(){
 		if(data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			var options = {
+			$(document).blur(function(){
+				var options = {
 				body: data.msg,
 				icon: data.img
-			};
-			var notif = new Notification(data.user+" dice:", options);
-			setTimeout(notif.close, 3000);
+				};
+				var notif = new Notification(data.user+" dice:", options);
+				setTimeout(notif.close, 1000);
+			});	
+			
 		}
 	});
 
