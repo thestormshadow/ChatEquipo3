@@ -82,12 +82,6 @@ $(function(){
 				else {
 
 					showMessage("inviteSomebody");
-					var options = {
-						body: "Hola! "+ name +" has entrado ala sala de chat",
-						icon: "img/logoNotifs.png"
-					};
-					var notif = new Notification("Bienvenido!", options);
-					setTimeout(notif.close, 1000);
 					// call the server-side function 'login' and send user's parameters
 					socket.emit('login', {user: name, avatar: email, id: id});
 				}
@@ -120,13 +114,7 @@ $(function(){
 					alert("Wrong e-mail format!");
 				}
 				else {
-					socket.emit('login', {user: name, avatar: email, id: id});					
-					var options = {
-						body: "Hola! "+ name +" has entrado ala sala de chat",
-						icon: "img/logoNotifs.png"
-					};
-					var notif = new Notification("Bienvenido!", options);
-					setTimeout(notif.close, 1000);
+					socket.emit('login', {user: name, avatar: email, id: id});
 				}
 
 			});
@@ -189,10 +177,8 @@ $(function(){
 				icon: data.img
 				};
 				var notif = new Notification(data.user+" dice:", options);
-				//notif.onclick = function () {
-				//	window.focus();
-				//};
-				setTimeout(function() { notif.close() }, 3000);
+				
+				setTimeout(function() { notif.close() }, 1000);
 			}			
 		}
 	});
@@ -242,7 +228,6 @@ $(function(){
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();		
 	});
-	
 	$(window).focus(function() {
     window_focus = true;
 	})
