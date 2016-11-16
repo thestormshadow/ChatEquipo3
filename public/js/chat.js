@@ -176,7 +176,7 @@ $(function(){
 			showMessage('tooManyPeople');
 		}
 	});
-	var notif;
+	
 	socket.on('receive', function(data){		
 		showMessage('chatStarted');
 
@@ -188,7 +188,7 @@ $(function(){
 				body: data.msg,
 				icon: data.img
 				};
-				notif = new Notification(data.user+" dice:", options);
+				var notif = new Notification(data.user+" dice:", options);
 				setTimeout(notif.close, 1000);
 			}			
 		}
