@@ -70,7 +70,6 @@ $(function(){
 				name = $.trim(yourName.val());
 				
 				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
 					alert("Tu nombre tiene que tener mas de 1 caracter!");
 					return;
 				}
@@ -85,7 +84,7 @@ $(function(){
 					showMessage("inviteSomebody");
 					var options = {
 						body: "Hola! "+ name +" has entrado ala sala de chat",
-						icon: "imgs/logoNotifs.png"
+						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
 					setTimeout(notif.close, 3000);
@@ -122,6 +121,11 @@ $(function(){
 				}
 				else {
 					socket.emit('login', {user: name, avatar: email, id: id});
+					var options = {
+						body: "Hola! "+ name +" has entrado ala sala de chat",
+						icon: "img/logoNotifs.png"
+					};
+					var notif = new Notification("Bienvenido!", options);
 				}
 
 			});
