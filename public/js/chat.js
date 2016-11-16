@@ -154,7 +154,7 @@ $(function(){
 				showMessage("heStartedChatWithNoMessages",data);
 			}
 			var options = {
-					body: data.users[1]+" ha entrado ala sala de chat.",
+						body: data.users[1]+" ha entrado ala sala de chat",
 					icon: "img/logoNotifs.png"
 			};
 			var notif = new Notification("Chat iniciado!", options);
@@ -166,15 +166,10 @@ $(function(){
 	socket.on('leave',function(data){
 
 		if(data.boolean && id==data.room){
-			
+
 			showMessage("somebodyLeft", data);
 			chats.empty();
-			var options = {
-					body: data.user+" ha salido ala sala de chat.",
-					icon: "img/logoNotifs.png"
-			};
-			var notif = new Notification("Notificación!", options);
-			setTimeout(function() { notif.close() }, 3000);
+
 		}
 
 	});
