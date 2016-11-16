@@ -153,8 +153,13 @@ $(function(){
 
 				showMessage("heStartedChatWithNoMessages",data);
 			}
+			//var options = {
+			//		body: data.users[1]+" ha entrado ala sala de chat.",
+			//		icon: "img/logoNotifs.png"
+			//};
+			//var notif = new Notification("Chat iniciado!", options);
+			//setTimeout(function() { notif.close() }, 3000);
 			chatNickname.text(friend);
-					
 		}
 	});
 
