@@ -176,9 +176,9 @@ $(function(){
 			showMessage('tooManyPeople');
 		}
 	});
-
+	var notif;
 	socket.on('receive', function(data){
-
+		notif.close;
 		showMessage('chatStarted');
 
 		if(data.msg.trim().length) {
