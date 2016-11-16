@@ -184,15 +184,14 @@ $(function(){
 		if(data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			$(document).blur(function(){
+			if(window_focus == false){
 				var options = {
 				body: data.msg,
 				icon: data.img
 				};
 				var notif = new Notification(data.user+" dice:", options);
 				setTimeout(notif.close, 1000);
-			});	
-			
+			}			
 		}
 	});
 
@@ -241,9 +240,12 @@ $(function(){
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();		
 	});
-	$(document).blur(function(name,msg,img){
-				
-	});	 
+	$(window).focus(function() {
+    window_focus = true;
+	})
+    .blur(function() {
+        window_focus = false;
+    }); 
 	
 	function AskForWebNotificationPermissions()
 	{
