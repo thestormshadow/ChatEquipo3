@@ -142,12 +142,7 @@ $(function(){
 
 	socket.on('startChat', function(data){
 		console.log(data);
-		var options21 = {
-						body: "test",
-						icon: "img/logoNotifs.png"
-					};
-		var notif21 = new Notification("Información", options21);
-		setTimeout(function() { notif21.close() }, 3000);
+		
 		if(data.boolean && data.id == id) {
 			
 			chats.empty();
