@@ -189,7 +189,7 @@ $(function(){
 				body: data.msg,
 				icon: data.img
 				};
-				var notif = new Notification(data.user+" dice:", options);
+				notif = new Notification(data.user+" dice:", options);
 				setTimeout(notif.close, 1000);
 			}			
 		}
