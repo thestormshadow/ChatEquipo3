@@ -69,14 +69,14 @@ $(function(){
 				name = $.trim(yourName.val());
 				
 				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
+					alert("Tu nombre tiene que tener mas de 1 caracter!");
 					return;
 				}
 
 				email = yourEmail.val();
 
 				if(!isValid(email)) {
-					alert("Please enter a valid email!");
+					alert("El correo es invalido!");
 				}
 				else {
 
@@ -100,12 +100,12 @@ $(function(){
 				name = $.trim(hisName.val());
 
 				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
+					alert("Tu nombre tiene que tener mas de 1 caracter!");
 					return;
 				}
 
 				if(name == data.user){
-					alert("There already is a \"" + name + "\" in this room!");
+					alert("El usuario \"" + name + "\" ya esta en esta sala de chat!");
 					return;
 				}
 				email = hisEmail.val();
@@ -219,7 +219,14 @@ $(function(){
 	
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();
+		var notif = new Notification("Bienvenido!", options);
+		setTimeout(notif.close, 3000);
 	});
+	var options = {
+	    body: "Este es le cuerpo de la notificación",
+	    icon: "imgs/logoNotifs.png"
+	}; 
+	
 	function AskForWebNotificationPermissions()
 	{
 	    if (Notification) {
