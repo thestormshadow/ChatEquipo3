@@ -176,7 +176,7 @@ $(function(){
 			showMessage('tooManyPeople');
 		}
 	});
-	
+
 	socket.on('receive', function(data){		
 		showMessage('chatStarted');
 
@@ -189,7 +189,10 @@ $(function(){
 				icon: data.img
 				};
 				var notif = new Notification(data.user+" dice:", options);
-				setTimeout(notif.close, 1000);
+				notification.onclick = function () {
+					window.focus();
+				};
+				setTimeout(function() { notif.close() }, 1000);
 			}			
 		}
 	});
