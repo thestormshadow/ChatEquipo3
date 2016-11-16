@@ -107,13 +107,11 @@ $(function(){
 				name = $.trim(hisName.val());
 
 				if(name.length < 1){
-					alert("Please enter a nick name longer than 1 character!");
 					alert("Tu nombre tiene que tener mas de 1 caracter!");
 					return;
 				}
 
 				if(name == data.user){
-					alert("There already is a \"" + name + "\" in this room!");
 					alert("El usuario \"" + name + "\" ya esta en esta sala de chat!");
 					return;
 				}
@@ -225,9 +223,6 @@ $(function(){
 		});
 
 	},60000);
-<<<<<<< HEAD
-
-=======
 	
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();		
@@ -243,7 +238,6 @@ $(function(){
 	function GetWebNotificationsSupported() {
     		return (!!window.Notification);
 	}
->>>>>>> 2a37a2327739ecbc74db5c538d27ca1f0ef5d5bc
 	// Function that creates a new chat message
 
 	function createChatMessage(msg,user,imgg,now){
@@ -286,11 +280,6 @@ $(function(){
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return re.test(thatemail);
 	}
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 2a37a2327739ecbc74db5c538d27ca1f0ef5d5bc
 	function showMessage(status,data){
 
 		if(status === "connected"){
