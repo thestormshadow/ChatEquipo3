@@ -159,10 +159,6 @@ $(function(){
 					icon: "img/logoNotifs.png"
 			};
 			var notifstartChat = new Notification("Chat iniciado!", optionsstartChat);
-			notifstartChat.onclick = function () {
-					notifstartChat.close();
-					window.focus();					
-				};
 			setTimeout(function() { notifstartChat.close() }, 3000);
 			
 		}
