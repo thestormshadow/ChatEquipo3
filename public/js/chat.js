@@ -1,5 +1,6 @@
 // This file is executed in the browser, when people visit /chat/<random id>
 
+
 $(function(){
 
 	// getting the id of the room from the url
@@ -89,7 +90,12 @@ $(function(){
 				else {
 
 					showMessage("inviteSomebody");
-
+					var options = {
+						body: "Hola! "+ name +" has entrado ala sala de chat",
+						icon: "imgs/logoNotifs.png"
+					};
+					var notif = new Notification("Bienvenido!", options);
+					setTimeout(notif.close, 3000);
 					// call the server-side function 'login' and send user's parameters
 					socket.emit('login', {user: name, avatar: email, id: id});
 				}
@@ -237,14 +243,9 @@ $(function(){
 =======
 	
 	$(document).ready(function(){
-		AskForWebNotificationPermissions();
-		var notif = new Notification("Bienvenido!", options);
-		setTimeout(notif.close, 3000);
+		AskForWebNotificationPermissions();		
 	});
-	var options = {
-	    body: "Este es le cuerpo de la notificación",
-	    icon: "imgs/logoNotifs.png"
-	}; 
+	 
 	
 	function AskForWebNotificationPermissions()
 	{
