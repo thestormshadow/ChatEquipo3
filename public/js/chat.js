@@ -120,12 +120,13 @@ $(function(){
 					alert("Wrong e-mail format!");
 				}
 				else {
-					socket.emit('login', {user: name, avatar: email, id: id});
+					socket.emit('login', {user: name, avatar: email, id: id});					
 					var options = {
 						body: "Hola! "+ name +" has entrado ala sala de chat",
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
+					setTimeout(notif.close, 3000);
 				}
 
 			});
@@ -183,6 +184,8 @@ $(function(){
 		if(data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
+			sendNotif(data.user, data.msg, data.img);
+			
 		}
 	});
 
@@ -231,7 +234,17 @@ $(function(){
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();		
 	});
-	 
+	$(document).blur(function(){
+				function sendNotif(name,msg,img){
+					var options = {
+						body: msg,
+						icon: img
+					};
+					var notif = new Notification(name+" dice:", options);
+					setTimeout(notif.close, 3000);
+
+				}
+			});	 
 	
 	function AskForWebNotificationPermissions()
 	{
