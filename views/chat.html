@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<!--
+	This file is rendered by express.js, when the rurl /chat/123456 is visited in a browser.
+	It includes jQuery, socket.io.js (it is automatically served by the socket.io library), 
+	and a few more JavaScript files that you should check out.
+-->
+
+<html>
+
+<head>
+
+	<title>Equipo3 chat Room</title>
+
+	<link type="text/css" rel="stylesheet" href="../css/stylesheet.css" />
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
+	<script src="../js/jquery-3.1.1.min.js"></script>
+
+</head>
+
+<body>
+
+	<header class="banner">
+
+		<h1 class="bannertext">
+			<a href="#" id="logo">Equipo3<span> Chat Room</span></a>
+		</h1>
+
+	</header>
+
+
+	<section class="section">
+
+		<!-- These elements are displayed as white info cards in the middle of the screen -->
+
+		<div class="connected">
+
+			<img src="../img/unnamed.jpg" id="creatorImage" />
+
+			<div class="infoConnected">
+				<h2>Quien eres?</h2>
+				<br/>
+
+				<form class="loginForm">
+					<input type="text" id="yourName" placeholder="Tu Nombre" /><br/>
+					<input type="text" id="yourEmail" placeholder="Tu correo (de aspel)" /><br/>
+					<input type="submit" id="yourEnter" value="ENTER" />
+				</form>
+
+			</div>
+
+		</div>
+
+		<div class="personinside">
+
+			<img src="../img/unnamed.jpg" id="ownerImage" />
+
+			<div class="infoInside">
+				<h2>Chateando Con <span class="nickname-chat"></span>, Quien eres?</h2>
+				<br/>
+
+				<form class="loginForm">
+					<input type="text" id="hisName" placeholder="Tu Nombre" /><br/>
+					<input type="text" id="hisEmail" placeholder="Tu correo (de aspel)" /><br/>
+					<input type="submit" id="hisEnter" value="Entrar" />
+				</form>
+
+			</div>
+
+		</div>
+
+		<div class="invite-textfield">
+
+			<h2>¡Vaya, no hay otras personas en este chat!</h2>
+			<h5>Invita a un amigo enviándoles esta URL</h5>
+
+			<div class="link">
+				<a title="Invite a friend" href="" id="link"></a>
+			</div>
+
+		</div>
+
+		<div class="left">
+
+			<img src="../img/unnamed.jpg" id="leftImage" />
+
+			<div class="info">
+				<h2><span class="nickname-left"></span> Ha dejado este chat.</h2>
+				<h5>Invite a otra persona enviándoles esta página.</h5>
+			</div>
+
+		</div>
+
+		<div class="toomanypeople">
+
+			<h2>Ups, no puedes unirte a este chat!</h2>
+			<h5>Ya hay dos personas en ella. ¿Desea crear una <a title="New Room" href="/create" id="room">nueva sala de chat</a>?</h5>
+
+		</div>
+
+		<div class="nomessages">
+
+			<img src="../img/unnamed.jpg" id="noMessagesImage" />
+
+			<div class="info">
+				<h2>Estás Chateando con <span class="nickname-chat"></span>.</h2>
+				<h5>Envíele un mensaje desde el formulario de abajo!</h5>
+			</div>
+
+		</div>
+
+		<div class="chatscreen">
+
+			<ul class="chats">
+				<!-- The chat messages will go here -->
+			</ul>
+
+		</div>
+
+	</section>
+
+	<footer>
+
+		<form id="chatform">
+
+			<textarea id="message" placeholder="Escribe cualquer cosa.."></textarea>
+			<input type="submit" id="submit" value="Enviar"/>
+
+		</form>
+
+	</footer>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="../js/moment.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="../js/chat.js"></script>
+
+</body>
+
+</html>
