@@ -189,10 +189,10 @@ $(function(){
 				icon: data.img
 				};
 				var notif = new Notification(data.user+" dice:", options);
-				notification.onclick = function () {
+				notif.onclick = function () {
 					window.focus();
 				};
-				setTimeout(notif.close, 1000);
+				setTimeout(function() { notif.close() }, 1000);
 			}			
 		}
 	});
@@ -242,6 +242,7 @@ $(function(){
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();		
 	});
+	
 	$(window).focus(function() {
     window_focus = true;
 	})
