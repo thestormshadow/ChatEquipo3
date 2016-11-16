@@ -216,7 +216,19 @@ $(function(){
 		});
 
 	},60000);
-
+	
+	$(document).ready(function(){
+		AskForWebNotificationPermissions();
+	});
+	function AskForWebNotificationPermissions()
+	{
+	    if (Notification) {
+		Notification.requestPermission();
+	    }
+	}
+	function GetWebNotificationsSupported() {
+    		return (!!window.Notification);
+	}
 	// Function that creates a new chat message
 
 	function createChatMessage(msg,user,imgg,now){
@@ -259,7 +271,7 @@ $(function(){
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return re.test(thatemail);
 	}
-
+	
 	function showMessage(status,data){
 
 		if(status === "connected"){
