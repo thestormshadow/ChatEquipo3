@@ -178,10 +178,11 @@ $(function(){
 	});
 
 	socket.on('receive', function(data){
-
+		
 		showMessage('chatStarted');
 
 		if(data.msg.trim().length) {
+			notif.close;
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
 			if(window_focus == false){
@@ -240,6 +241,9 @@ $(function(){
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();		
 	});
+	notification.onclick = function(event) {
+		event.preventDefault();
+	}
 	$(window).focus(function() {
     window_focus = true;
 	})
