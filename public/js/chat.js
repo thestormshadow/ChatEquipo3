@@ -184,8 +184,12 @@ $(function(){
 		if(data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			//sendNotif(data.user, data.msg, data.img);
-			
+			var options = {
+				body: msg,
+				icon: img
+			};
+			var notif = new Notification(name+" dice:", options);
+			setTimeout(notif.close, 3000);
 		}
 	});
 
@@ -234,17 +238,9 @@ $(function(){
 	$(document).ready(function(){
 		AskForWebNotificationPermissions();		
 	});
-	$(document).blur(function(){
-				function sendNotif(name,msg,img){
-					var options = {
-						body: msg,
-						icon: img
-					};
-					var notif = new Notification(name+" dice:", options);
-					setTimeout(notif.close, 3000);
-
-				}
-			});	 
+	$(document).blur(function(name,msg,img){
+				
+	});	 
 	
 	function AskForWebNotificationPermissions()
 	{
