@@ -189,9 +189,9 @@ $(function(){
 				icon: data.img
 				};
 				var notif = new Notification(data.user+" dice:", options);
-				//notif.onclick = function () {
-				//	window.focus();
-				//};
+				notif.onclick = function () {
+					window.focus();
+				};
 				setTimeout(function() { notif.close() }, 3000);
 			}			
 		}
