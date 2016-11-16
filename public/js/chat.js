@@ -83,11 +83,11 @@ $(function(){
 
 					showMessage("inviteSomebody");
 					var options = {
-						body: "Hola! "+ name +" has entrado ala sala de chat",
+						body: "Hola! "+ name +" has entrado ala sala de chat, Invita a alguien",
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
-					setTimeout(notif.close, 1000);
+					setTimeout(function() { notif.close() }, 3000);
 					// call the server-side function 'login' and send user's parameters
 					socket.emit('login', {user: name, avatar: email, id: id});
 				}
@@ -126,7 +126,7 @@ $(function(){
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
-					setTimeout(notif.close, 1000);
+					setTimeout(function() { notif.close() }, 3000);
 				}
 
 			});
@@ -147,14 +147,18 @@ $(function(){
 			chats.empty();
 
 			if(name === data.users[0]) {
-
 				showMessage("youStartedChatWithNoMessages",data);
 			}
 			else {
 
 				showMessage("heStartedChatWithNoMessages",data);
 			}
-
+			var options = {
+						body: data.users[1]+" ha entrado ala sala de chat",
+						icon: "img/logoNotifs.png"
+					};
+					var notif = new Notification("Chat iniciado!", options);
+					setTimeout(function() { notif.close() }, 3000);
 			chatNickname.text(friend);
 		}
 	});
@@ -165,6 +169,7 @@ $(function(){
 
 			showMessage("somebodyLeft", data);
 			chats.empty();
+			
 		}
 
 	});
@@ -190,8 +195,8 @@ $(function(){
 				};
 				var notif = new Notification(data.user+" dice:", options);
 				notif.onclick = function () {
-					window.focus();
 					notif.close();
+					window.focus();					
 				};
 				setTimeout(function() { notif.close() }, 3000);
 			}			
