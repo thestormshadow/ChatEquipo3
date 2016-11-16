@@ -83,7 +83,7 @@ $(function(){
 
 					showMessage("inviteSomebody");
 					var options = {
-						body: "Hola! "+ name +" has entrado ala sala de chat, esperando compañero de chat...",
+						body: "Hola! "+ name +" has entrado ala sala de chat",
 						icon: "img/logoNotifs.png"
 					};
 					var notif = new Notification("Bienvenido!", options);
