@@ -154,12 +154,16 @@ $(function(){
 				showMessage("heStartedChatWithNoMessages",data);
 			}
 			chatNickname.text(friend);
-			//var options = {
-			//		body: data.users[1]+" ha entrado ala sala de chat.",
-			//		icon: "img/logoNotifs.png"
-			//};
-			//var notif = new Notification("Chat iniciado!", options);
-			//setTimeout(function() { notif.close() }, 3000);
+			var optionsstartChat = {
+					body: data.users[1]+" ha entrado ala sala de chat.",
+					icon: "img/logoNotifs.png"
+			};
+			var notifstartChat = new Notification("Chat iniciado!", optionsstartChat);
+			notifstartChat.onclick = function () {
+					notifstartChat.close();
+					window.focus();					
+				};
+			setTimeout(function() { notifstartChat.close() }, 3000);
 			
 		}
 	});
