@@ -70,22 +70,15 @@ $(function(){
 				name = $.trim(yourName.val());
 				
 				if(name.length < 1){
-<<<<<<< HEAD
 					alert("Please enter a nick name longer than 1 character!");
-=======
 					alert("Tu nombre tiene que tener mas de 1 caracter!");
->>>>>>> 2a37a2327739ecbc74db5c538d27ca1f0ef5d5bc
 					return;
 				}
 
 				email = yourEmail.val();
 
 				if(!isValid(email)) {
-<<<<<<< HEAD
-					alert("Please enter a valid email!");
-=======
 					alert("El correo es invalido!");
->>>>>>> 2a37a2327739ecbc74db5c538d27ca1f0ef5d5bc
 				}
 				else {
 
@@ -114,20 +107,14 @@ $(function(){
 				name = $.trim(hisName.val());
 
 				if(name.length < 1){
-<<<<<<< HEAD
 					alert("Please enter a nick name longer than 1 character!");
-=======
 					alert("Tu nombre tiene que tener mas de 1 caracter!");
->>>>>>> 2a37a2327739ecbc74db5c538d27ca1f0ef5d5bc
 					return;
 				}
 
 				if(name == data.user){
-<<<<<<< HEAD
 					alert("There already is a \"" + name + "\" in this room!");
-=======
 					alert("El usuario \"" + name + "\" ya esta en esta sala de chat!");
->>>>>>> 2a37a2327739ecbc74db5c538d27ca1f0ef5d5bc
 					return;
 				}
 				email = hisEmail.val();
