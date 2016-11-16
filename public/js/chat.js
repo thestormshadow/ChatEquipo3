@@ -159,7 +159,7 @@ $(function(){
 			//};
 			//var notif = new Notification("Chat iniciado!", options);
 			//setTimeout(function() { notif.close() }, 3000);
-			chatNickname.text(friend);
+			//chatNickname.text(friend);
 		}
 	});
 
