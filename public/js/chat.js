@@ -135,27 +135,25 @@ $(function(){
 			chats.empty();
 
 			if(name === data.users[0]) {
+				var optionstartChat = {
+				body: data.users[1]+" ha entrado al chat",
+				icon: data.img
+				};
+					
+				var notistartChat = new Notification("Información", optionstartChat);
 
+				notistartChat.onclick = function () {
+					notistartChat.close();
+					window.focus();
+				};
+
+				setTimeout(function() { notistartChat.close() }, 3000);
 				showMessage("youStartedChatWithNoMessages",data);
 			}
 			else {
 
 				showMessage("heStartedChatWithNoMessages",data);
-			}
-
-			var optionleave = {
-			body: data.users[1]+" ha entrado al chat",
-			icon: data.img
-			};
-				
-			var notifleave = new Notification("Información", optionleave);
-
-			notifleave.onclick = function () {
-				notifleave.close();
-				window.focus();
-			};
-
-			setTimeout(function() { notifleave.close() }, 3000);
+			}	
 
 			chatNickname.text(friend);
 		}
