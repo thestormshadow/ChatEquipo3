@@ -1,21 +1,17 @@
-// This file is executed in the browser, when people visit /chat/<random id>
+
 
 var resive = false;
 $(function() {
 
-    // getting the id of the room from the url
     var id = Number(window.location.pathname.match(/\/chat\/(\d+)$/)[1]);
 
-    // connect to the socket
     var socket = io();
 
-    // variables which hold the data for each person
     var name = "",
         email = "",
         img = "",
         friend = "";
 
-    // cache some jQuery objects
     var section = $(".section"),
         footer = $("footer"),
         onConnect = $(".connected"),
@@ -26,7 +22,6 @@ $(function() {
         noMessages = $(".nomessages"),
         tooManyPeople = $(".toomanypeople");
 
-    // some more jquery objects
     var chatNickname = $(".nickname-chat"),
         leftNickname = $(".nickname-left"),
         loginForm = $(".loginForm"),
@@ -39,24 +34,20 @@ $(function() {
         messageTimeSent = $(".timesent"),
         chats = $(".chats");
 
-    // these variables hold images
     var ownerImage = $("#ownerImage"),
         leftImage = $("#leftImage"),
         noMessagesImage = $("#noMessagesImage");
 
 
-    // on connection to server get the id of person's room
     socket.on('connect', function() {
 
         socket.emit('load', id);
     });
 
-    // save the gravatar url
     socket.on('img', function(data) {
         img = data;
     });
 
-    // receive the names and avatars of all people in the chat room
     socket.on('peopleinchat', function(data) {
 
         if (data.number === 0) {
@@ -82,7 +73,6 @@ $(function() {
                 else {
                     notifyMe("Información.", "Esperando usuario con quien chatear.", data);
                     showMessage("inviteSomebody");
-                    // call the server-side function 'login' and send user's parameters
                     socket.emit('login', { user: name, avatar: email, id: id });
 
                 }
@@ -127,7 +117,6 @@ $(function() {
 
     });
 
-    // Other usefulls
 
     socket.on('startChat', function(data) {
         console.log(data);
@@ -172,7 +161,6 @@ $(function() {
 
         if (data.msg.trim().length) {
             resive = true;
-            //createChatMessage(data.msg, data.user, data.img, moment());
             recibeChatMessage(data.msg, data.user, data.img, moment());
             scrollToBottom();
             notifyMe(data.user + " dice:", data.msg, data);
@@ -181,7 +169,6 @@ $(function() {
 
     textarea.keypress(function(e) {
 
-        // Submit the form on enter
 
         if (e.which == 13) {
             e.preventDefault();
@@ -194,24 +181,18 @@ $(function() {
 
         e.preventDefault();
 
-        // Create a new chat message and display it directly
-
         showMessage("chatStarted");
 
         if (textarea.val().trim().length) {
-            //createChatMessage(textarea.val(), name, img, moment());
             createChatMessage(textarea.val(), name, img, moment());
             scrollToBottom();
             resive = false;
-            // Send the message to the other person in the chat
             socket.emit('msg', { msg: textarea.val(), user: name, img: img });
 
         }
-        // Empty the textarea
         textarea.val("");
     });
 
-    // Update the relative time stamps on the chat messages every minute
 
     setInterval(function() {
 
@@ -222,14 +203,11 @@ $(function() {
 
     }, 60000);
     function notifyMe(titulo, contenido, data) {
-        // Let's check if the browser supports notifications
         if (!("Notification" in window)) {
             console.log("This browser does not support desktop notification");
         }
 
-        // Let's check whether notification permissions have already been granted
         else if (Notification.permission === "granted") {
-            // If it's okay let's create a notification
             var options1 = {
                 body: contenido,
                 icon: data.img
@@ -238,21 +216,16 @@ $(function() {
             setTimeout(function() { notification.close() }, 3000);
         }
 
-        // Otherwise, we need to ask the user for permission
         else if (Notification.permission !== 'denied') {
             Notification.requestPermission(function(permission) {
-                // If the user accepts, let's create a notification
                 if (permission === "granted") {
                     var notification = new Notification("Se han activado las notificaciones!");
                 }
             });
         }
 
-        // At last, if the user has denied notifications, and you 
-        // want to be respectful there is no need to bother them any more.
     }
     $(document).ready(function() {
-        //AskForWebNotificationPermissions();
     });
     $(window).focus(function() {
         window_focus = true;
@@ -269,7 +242,7 @@ $(function() {
     function GetWebNotificationsSupported() {
         return (!!window.Notification);
     }
-    // Function that creates a new chat message
+    
     var ident = 1;
     var inc = 1;
     var inc2 = 1;
@@ -299,7 +272,7 @@ $(function() {
                 '</li>');
             ident++;
             inc++;
-            // use the 'text' method to escape malicious user input
+
             li.find('b').text(user);
 
             chats.append(li);
@@ -349,7 +322,7 @@ $(function() {
                 '</li>');
             ident++;
             inc2++;
-            // use the 'text' method to escape malicious user input
+
             li.find('b').text(user);
 
             chats.append(li);
@@ -402,7 +375,6 @@ $(function() {
 
         else if (status === "inviteSomebody") {
 
-            // Set the invite link content
             $("#link").text(window.location.href);
 
             onConnect.fadeOut(1200, function() {
