@@ -155,7 +155,7 @@ $(function(){
 				window.focus();
 			};
 
-			setTimeout(function() { notifleave.close() }, 1000);
+			setTimeout(function() { notifleave.close() }, 3000);
 
 			chatNickname.text(friend);
 		}
@@ -177,7 +177,7 @@ $(function(){
 				window.focus();
 			};
 
-			setTimeout(function() { notifleave.close() }, 1000);
+			setTimeout(function() { notifleave.close() }, 3000);
 
 			showMessage("somebodyLeft", data);
 			chats.empty();
@@ -212,7 +212,7 @@ $(function(){
 					window.focus();
 				};
 
-				setTimeout(function() { notifreceive.close() }, 1000);
+				setTimeout(function() { notifreceive.close() }, 3000);
 			}			
 		}
 	});
