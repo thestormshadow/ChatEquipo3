@@ -135,7 +135,7 @@ $(function () {
 			chats.empty();
 
 			if (name === data.users[0]) {
-				notifyMe("Información",data.users[0]+" ha entrado del chat.",data);
+				notifyMe("Información",data.users[1]+" ha entrado del chat.",data);
 				showMessage("youStartedChatWithNoMessages", data);
 			}
 			else {
