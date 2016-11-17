@@ -179,12 +179,12 @@ $(function(){
 				
 				var notif1 = new Notification(data.user+" dice:", options1);
 
-				notif1.onclick = function () {
-					notif1.close();
-					window.focus();
-				};
+				//notif1.onclick = function () {
+				//	notif1.close();
+				//	window.focus();
+				//};
 
-				setTimeout(function() { notif1.close() }, 3000);
+				setTimeout(function() { notif1.close() }, 1000);
 			}			
 		}
 	});
