@@ -227,7 +227,8 @@ $(function () {
 			// If it's okay let's create a notification
 			var options1 = {
 				body: data.msg,
-				icon: data.img
+				icon: data.img,
+				renotify: true
 			};
 			var notification = new Notification(titulo,options1);
 			notification.renotify;
