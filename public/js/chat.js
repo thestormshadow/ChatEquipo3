@@ -226,7 +226,7 @@ $(function() {
 
     }
     $(document).ready(function() {
-        moment.locale('es');
+        
     });
     $(window).focus(function() {
         window_focus = true;
@@ -294,6 +294,7 @@ $(function() {
         }
         var realident2 = ident - 1;
         messageTimeSent = $("#timesent" + realident2);
+        now.locale('es');
         messageTimeSent.last().text(now.fromNow());
     }
     function createChatMessage(msg, user, imgg, now) {
@@ -342,6 +343,7 @@ $(function() {
         }
         var realident2 = ident - 1;
         messageTimeSent = $("#timesent" + realident2);
+        now.locale('es');
         messageTimeSent.last().text(now.fromNow());
     }
     function checktxtEmotic(context) {
