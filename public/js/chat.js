@@ -219,7 +219,7 @@ $(function () {
 	function notifyMe(titulo,data) {
 		// Let's check if the browser supports notifications
 		if (!("Notification" in window)) {
-			alert("This browser does not support desktop notification");
+			log("This browser does not support desktop notification");
 		}
 
 		// Let's check whether notification permissions have already been granted
@@ -230,6 +230,7 @@ $(function () {
 				icon: data.img
 			};
 			var notification = new Notification(titulo,options1);
+			notification.renotify;
 		}
 
 		// Otherwise, we need to ask the user for permission
