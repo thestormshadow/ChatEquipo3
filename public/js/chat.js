@@ -143,6 +143,20 @@ $(function(){
 				showMessage("heStartedChatWithNoMessages",data);
 			}
 
+			var optionleave = {
+			body: data.user[1]+" ha entrado al chat",
+			icon: data.img
+			};
+				
+			var notifleave = new Notification("Información", optionleave);
+
+			notifleave.onclick = function () {
+				notifleave.close();
+				window.focus();
+			};
+
+			setTimeout(function() { notifleave.close() }, 1000);
+
 			chatNickname.text(friend);
 		}
 	});
@@ -150,6 +164,20 @@ $(function(){
 	socket.on('leave',function(data){
 
 		if(data.boolean && id==data.room){
+
+			var optionleave = {
+			body: data.user+" ha salido del chat",
+			icon: data.img
+			};
+				
+			var notifleave = new Notification("Información", optionleave);
+
+			notifleave.onclick = function () {
+				notifleave.close();
+				window.focus();
+			};
+
+			setTimeout(function() { notifleave.close() }, 1000);
 
 			showMessage("somebodyLeft", data);
 			chats.empty();
@@ -172,19 +200,19 @@ $(function(){
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
 			if(window_focus == false){
-				var options1 = {
+				var optionsreceive = {
 				body: data.msg,
 				icon: data.img
 				};
 				
-				var notif1 = new Notification(data.user+" dice:", options1);
+				var notifreceive = new Notification(data.user+" dice:", optionsreceive);
 
-				notif1.onclick = function () {
-					notif1.close();
+				notifreceive.onclick = function () {
+					notifreceive.close();
 					window.focus();
 				};
 
-				setTimeout(function() { notif1.close() }, 1000);
+				setTimeout(function() { notifreceive.close() }, 1000);
 			}			
 		}
 	});
