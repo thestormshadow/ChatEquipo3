@@ -144,7 +144,7 @@ $(function(){
 			}
 
 			var optionleave = {
-			body: data.user[1]+" ha entrado al chat",
+			body: data.users[1]+" ha entrado al chat",
 			icon: data.img
 			};
 				
