@@ -171,7 +171,7 @@ $(function () {
 		if (data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			notifyMe("titulo","contenido",3000);
+			notifyMe("titulo1","contenido",3000);
 		}
 	});
 
