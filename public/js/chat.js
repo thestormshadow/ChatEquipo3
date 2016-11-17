@@ -171,7 +171,7 @@ $(function () {
 		if (data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			notifyMe(data.msg);
+			notifyMe(data.user+" dice:",data);
 		}
 	});
 
@@ -216,7 +216,7 @@ $(function () {
 		});
 
 	}, 60000);
-	function notifyMe(body) {
+	function notifyMe(titulo,data) {
 		// Let's check if the browser supports notifications
 		if (!("Notification" in window)) {
 			alert("This browser does not support desktop notification");
@@ -225,7 +225,11 @@ $(function () {
 		// Let's check whether notification permissions have already been granted
 		else if (Notification.permission === "granted") {
 			// If it's okay let's create a notification
-			var notification = new Notification(body);
+			var options1 = {
+				body: data.msg,
+				icon: data.img
+			};
+			var notification = new Notification(titulo,options1);
 		}
 
 		// Otherwise, we need to ask the user for permission
