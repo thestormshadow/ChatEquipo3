@@ -126,7 +126,7 @@ $(function () {
 
 	});
 
-	// Other useful 
+	// Other usefulls
 
 	socket.on('startChat', function (data) {
 		console.log(data);
