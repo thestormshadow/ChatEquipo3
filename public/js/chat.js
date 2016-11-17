@@ -171,7 +171,7 @@ $(function () {
 		if (data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			notifyMe();
+			notifyMe("titulo","contenido",3000);
 		}
 	});
 
@@ -216,10 +216,10 @@ $(function () {
 		});
 
 	}, 60000);
-	function notifyMe() {
+	function notifyMe(titulo,contenido,tiempo) {
 		// Let's check if the browser supports notifications
 		if (!("Notification" in window)) {
-			alert("This browser does not support desktop notification");
+			//alert("This browser does not support desktop notification");
 		}
 
 		// Let's check whether notification permissions have already been granted
@@ -232,8 +232,18 @@ $(function () {
 		else if (Notification.permission !== 'denied') {
 			Notification.requestPermission(function (permission) {
 				// If the user accepts, let's create a notification
+				var optns = {
+				body: contenido,
+				icon: data.img
+				};
 				if (permission === "granted") {
-					var notification = new Notification("Hi there!");
+					var notification = new Notification(titulo,optns);
+					notification.onclick = function () {
+						notification.close();
+						window.focus();
+					};
+
+					setTimeout(function () { notification.close() }, tiempo);
 				}
 			});
 		}
