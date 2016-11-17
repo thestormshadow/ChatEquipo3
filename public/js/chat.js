@@ -171,7 +171,7 @@ $(function () {
 		if (data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-
+			notifyMe();
 		}
 	});
 
