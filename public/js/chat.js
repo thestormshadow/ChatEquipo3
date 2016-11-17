@@ -230,7 +230,7 @@ $(function () {
 				icon: data.img
 			};
 			var notification = new Notification(titulo,options1);
-			setTimeout(function() { notification.close() }, 1000);
+			setTimeout(function() { notification.close() }, 3000);
 		}
 
 		// Otherwise, we need to ask the user for permission
