@@ -231,7 +231,7 @@ $(function () {
 				renotify: true
 			};
 			var notification = new Notification(titulo,options1);
-			notification.renotify
+			//notification.renotify
 		}
 
 		// Otherwise, we need to ask the user for permission
