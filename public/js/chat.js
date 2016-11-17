@@ -227,11 +227,10 @@ $(function () {
 			// If it's okay let's create a notification
 			var options1 = {
 				body: data.msg,
-				icon: data.img,
-				renotify: true
+				icon: data.img
 			};
 			var notification = new Notification(titulo,options1);
-			//notification.renotify
+			
 		}
 
 		// Otherwise, we need to ask the user for permission
