@@ -171,7 +171,7 @@ $(function () {
 		if (data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-
+			notifyMe("titulo","contenido",3000);
 		}
 	});
 
@@ -216,7 +216,7 @@ $(function () {
 		});
 
 	}, 60000);
-	function notifyMe() {
+	function notifyMe(titulo,contenido,tiempo) {
 		// Let's check if the browser supports notifications
 		if (!("Notification" in window)) {
 			//alert("This browser does not support desktop notification");
