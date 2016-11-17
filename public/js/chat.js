@@ -135,7 +135,7 @@ $(function () {
 			chats.empty();
 
 			if (name === data.users[0]) {
-
+				notifyMe("Información",data.users[0]+" ha entrado del chat.",data);
 				showMessage("youStartedChatWithNoMessages", data);
 			}
 			else {
@@ -153,6 +153,7 @@ $(function () {
 
 			showMessage("somebodyLeft", data);
 			chats.empty();
+			notifyMe("Información",data.user+" ha salido del chat.",data);
 		}
 
 	});
@@ -171,7 +172,7 @@ $(function () {
 		if (data.msg.trim().length) {
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
-			notifyMe(data.user+" dice:",data);
+			notifyMe(data.user+" dice:",data.msg,data);
 		}
 	});
 
@@ -216,17 +217,17 @@ $(function () {
 		});
 
 	}, 60000);
-	function notifyMe(titulo,data) {
+	function notifyMe(titulo,contenido,data) {
 		// Let's check if the browser supports notifications
 		if (!("Notification" in window)) {
-			log("This browser does not support desktop notification");
+			console.log("This browser does not support desktop notification");
 		}
 
 		// Let's check whether notification permissions have already been granted
 		else if (Notification.permission === "granted") {
 			// If it's okay let's create a notification
 			var options1 = {
-				body: data.msg,
+				body: contenido,
 				icon: data.img
 			};
 			var notification = new Notification(titulo,options1);
