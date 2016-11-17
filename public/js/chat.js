@@ -172,19 +172,19 @@ $(function(){
 			createChatMessage(data.msg, data.user, data.img, moment());
 			scrollToBottom();
 			if(window_focus == false){
-				var optionsreceive = {
+				var options1 = {
 				body: data.msg,
 				icon: data.img
 				};
 				
-				var notifreceive = new Notification(data.user+" dice:", optionsreceive);
+				var notif1 = new Notification(data.user+" dice:", options1);
 
-				notifreceive.onclick = function () {
-					notifreceive.close();
+				notif1.onclick = function () {
+					notif1.close();
 					window.focus();
 				};
 
-				setTimeout(function() { notifreceive.close() }, 1000);
+				setTimeout(function() { notif1.close() }, 3000);
 			}			
 		}
 	});
