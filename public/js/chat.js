@@ -226,6 +226,7 @@ $(function() {
 
     }
     $(document).ready(function() {
+        moment.locale('es');
     });
     $(window).focus(function() {
         window_focus = true;
