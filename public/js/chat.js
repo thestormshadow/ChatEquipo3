@@ -140,9 +140,11 @@ $(function() {
     socket.on('leave', function(data) {
 
         if (data.boolean && id == data.room) {
-
-            showMessage("somebodyLeft", data);
-            chats.empty();
+            if(data.rooms > 2){
+                showMessage("somebodyLeft", data);
+                chats.empty();
+            }
+            
             notifyMe("Información", data.user + " ha salido del chat.", data);
         }
 
@@ -225,9 +227,7 @@ $(function() {
         }
 
     }
-    $(document).ready(function() {
-        
-    });
+    
     $(window).focus(function() {
         window_focus = true;
     })
@@ -252,6 +252,9 @@ $(function() {
         if (messageTimeSent.last().text() != now.fromNow()) {
             inc = 1;
         }
+        if ($("b").last().text() != user) {
+            inc = 1;
+        }
         if (inc == 1) {
             var who = '';
 
@@ -265,19 +268,18 @@ $(function() {
             var li = $(
                 '<li class=' + who + '>' +
                 '<div class="image">' +
-                '<img src=' + imgg + ' />' +
+                '<img id="imgusr" src=' + imgg + ' />' +
                 '<b></b>' +
                 '<i id="timesent' + ident + '" class="timesent" data-time=' + now + '></i> ' +
                 '</div>' +
                 '<p id="' + ident + 't"></p>' +
                 '</li>');
-            ident++;
-            inc++;
-
+            
             li.find('b').text(user);
 
             chats.append(li);
-
+            ident++;
+            inc++;
             var realident = ident - 1;
             var contnt = $("#" + realident + "t").html();
             contnt = contnt + checktxtEmotic(msg);
@@ -315,18 +317,19 @@ $(function() {
             var li = $(
                 '<li class=' + who + '>' +
                 '<div class="image">' +
-                '<img src=' + imgg + ' />' +
+                '<img class="imgusr" src=' + imgg + ' />' +
                 '<b></b>' +
                 '<i id="timesent' + ident + '" class="timesent" data-time=' + now + '></i> ' +
                 '</div>' +
                 '<p id="' + ident + 't"></p>' +
                 '</li>');
-            ident++;
-            inc2++;
 
             li.find('b').text(user);
-
+            
             chats.append(li);
+            
+            ident++;
+            inc2++;
 
             var realident = ident - 1;
             var contnt = $("#" + realident + "t").html();

@@ -14,7 +14,18 @@ module.exports = function(app,io){
 		res.redirect('/chat/'+id);
 	});
 
+	app.get('/createpublic', function(req,res){
+
+		var id = Math.round((Math.random() * 1000000));
+
+		res.redirect('/chatpublic/123');
+	});
+
 	app.get('/chat/:id', function(req,res){
+
+		res.render('chat');
+	});
+	app.get('/chatpublic/:id', function(req,res){
 
 		res.render('chat');
 	});
@@ -28,7 +39,11 @@ module.exports = function(app,io){
 
 				socket.emit('peopleinchat', {number: 0});
 			}
-			else if(room.length === 1) {
+			else if(room.length >= 3) {
+
+				chat.emit('tooMany', {boolean: true});
+			}
+			else {
 
 				socket.emit('peopleinchat', {
 					number: 1,
@@ -37,16 +52,13 @@ module.exports = function(app,io){
 					id: data
 				});
 			}
-			else if(room.length >= 2) {
-
-				chat.emit('tooMany', {boolean: true});
-			}
+			
 		});
 
 		socket.on('login', function(data) {
 
 			var room = findClientsSocket(io, data.id);
-			if (room.length < 2) {
+			if (room.length < 3) {
 
 				socket.username = data.user;
 				socket.room = data.id;
@@ -56,7 +68,7 @@ module.exports = function(app,io){
 
 				socket.join(data.id);
 
-				if (room.length == 1) {
+				if (room.length > 1) {
 
 					var usernames = [],
 						avatars = [];
