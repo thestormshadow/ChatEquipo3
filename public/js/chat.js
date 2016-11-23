@@ -1,7 +1,7 @@
 
 
 var resive = false;
-$(function() {
+$(function () {
 
     var id = Number(window.location.pathname.match(/\/chat\/(\d+)$/)[1]);
 
@@ -39,22 +39,22 @@ $(function() {
         noMessagesImage = $("#noMessagesImage");
 
 
-    socket.on('connect', function() {
+    socket.on('connect', function () {
 
         socket.emit('load', id);
     });
 
-    socket.on('img', function(data) {
+    socket.on('img', function (data) {
         img = data;
     });
 
-    socket.on('peopleinchat', function(data) {
+    socket.on('peopleinchat', function (data) {
 
         if (data.number === 0) {
 
             showMessage("connected");
 
-            loginForm.on('submit', function(e) {
+            loginForm.on('submit', function (e) {
 
                 e.preventDefault();
 
@@ -84,7 +84,7 @@ $(function() {
 
             showMessage("personinchat", data);
 
-            loginForm.on('submit', function(e) {
+            loginForm.on('submit', function (e) {
 
                 e.preventDefault();
 
@@ -118,7 +118,7 @@ $(function() {
     });
 
 
-    socket.on('startChat', function(data) {
+    socket.on('startChat', function (data) {
         console.log(data);
         if (data.boolean && data.id == id) {
 
@@ -137,20 +137,20 @@ $(function() {
         }
     });
 
-    socket.on('leave', function(data) {
+    socket.on('leave', function (data) {
 
         if (data.boolean && id == data.room) {
-            if(data.rooms > 2){
+            if (data.rooms > 2) {
                 showMessage("somebodyLeft", data);
                 chats.empty();
             }
-            
+
             notifyMe("Información", data.user + " ha salido del chat.", data);
         }
 
     });
 
-    socket.on('tooMany', function(data) {
+    socket.on('tooMany', function (data) {
 
         if (data.boolean && name.length === 0) {
 
@@ -158,7 +158,7 @@ $(function() {
         }
     });
 
-    socket.on('receive', function(data) {
+    socket.on('receive', function (data) {
         showMessage('chatStarted');
 
         if (data.msg.trim().length) {
@@ -169,7 +169,7 @@ $(function() {
         }
     });
 
-    textarea.keypress(function(e) {
+    textarea.keypress(function (e) {
 
 
         if (e.which == 13) {
@@ -179,7 +179,7 @@ $(function() {
 
     });
 
-    chatForm.on('submit', function(e) {
+    chatForm.on('submit', function (e) {
 
         e.preventDefault();
 
@@ -196,9 +196,9 @@ $(function() {
     });
 
 
-    setInterval(function() {
+    setInterval(function () {
 
-        messageTimeSent.each(function() {
+        messageTimeSent.each(function () {
             var each = moment($(this).data('time'));
             $(this).text(each.fromNow());
         });
@@ -215,11 +215,11 @@ $(function() {
                 icon: data.img
             };
             var notification = new Notification(titulo, options1);
-            setTimeout(function() { notification.close() }, 3000);
+            setTimeout(function () { notification.close() }, 3000);
         }
 
         else if (Notification.permission !== 'denied') {
-            Notification.requestPermission(function(permission) {
+            Notification.requestPermission(function (permission) {
                 if (permission === "granted") {
                     var notification = new Notification("Se han activado las notificaciones!");
                 }
@@ -227,11 +227,11 @@ $(function() {
         }
 
     }
-    
-    $(window).focus(function() {
+
+    $(window).focus(function () {
         window_focus = true;
     })
-        .blur(function() {
+        .blur(function () {
             window_focus = false;
         });
 
@@ -243,7 +243,7 @@ $(function() {
     function GetWebNotificationsSupported() {
         return (!!window.Notification);
     }
-    
+
     var ident = 1;
     var inc = 1;
     var inc2 = 1;
@@ -274,7 +274,7 @@ $(function() {
                 '</div>' +
                 '<p id="' + ident + 't"></p>' +
                 '</li>');
-            
+
             li.find('b').text(user);
 
             chats.append(li);
@@ -325,9 +325,9 @@ $(function() {
                 '</li>');
 
             li.find('b').text(user);
-            
+
             chats.append(li);
-            
+
             ident++;
             inc2++;
 
@@ -349,14 +349,77 @@ $(function() {
     }
     function checktxtEmotic(context) {
         var result = context;
-        var emotics = [":d:", ":xd:", ":p:"];
-        var directorios = ["risa", "equizde", "burlon"];
+        var emotics = [":d:", ":xd:", ":p:", ":c:", ":mmm:", ":dd:"];
+        var directorios = ["risa", "equizde", "burlon", "trizted", "pensar", "yea"];
         for (var a = 0; a < emotics.length; a++) {
             if (context.indexOf(emotics[a]) >= 0) {
-                result = context.replace(new RegExp(emotics[a], 'gi'), "<img src='/img/Emoticons/" + directorios[a] + ".png' width='5%' height='5%'/>")
+                result = context.replace(new RegExp(emotics[a], 'gi'), "<img src='/img/Emoticons/" + directorios[a] + ".png' width='30px' height='30px'/>")
             }
         }
         return result;
+    }
+
+    function ignoreDrag(e) {
+        e.originalEvent.stopPropagation();
+        e.originalEvent.preventDefault();
+        $("#message").attr('style', 'border-radius: 2px;border:2px solid #73AD21;');
+    }
+
+    function dragout(e) {
+        e.originalEvent.stopPropagation();
+        e.originalEvent.preventDefault();
+        $("#message").attr('style', 'border-radius: 2px;border: 1px solid #cccccc;');
+    }
+
+    $(document).ready(function () {
+        $('#sendFile')
+            .bind('dragenter', ignoreDrag)
+            .bind('dragover', ignoreDrag)
+            .bind('drop', dropFile);
+        $('#alerter')
+            .bind('dragenter', ignoreDrag)
+            .bind('dragover', ignoreDrag)
+            .bind('drop', drop);
+        $('#creatorImage').hover(function () {
+            $('#creatorImage').fadeOut(500, function () {
+                $('#creatorImage').fadeIn(500);
+            });
+        });
+
+    });
+
+    function drop(e) {
+        ignoreDrag(e);
+        var dt = e.originalEvent.dataTransfer;
+        var files = dt.files;
+        if (dt.files.length > 0) {
+            var fr = new FileReader();
+            fr.readAsDataURL(dt.files[0]);
+            fr.onload = function (oFREvent) {
+                $("#creatorImage").attr('src', oFREvent.target.result);
+            };
+        }
+    }
+
+    function dropFile(e) {
+        dragout(e);
+        var dt = e.originalEvent.dataTransfer;
+        var files = dt.files;
+        if (dt.files.length > 0) {
+            var fr = new FileReader();
+            fr.readAsDataURL(dt.files[0]);
+            fr.onload = function (oFREvent) {
+                showMessage("chatStarted");
+                if(files[0].name.indexOf(".png") != -1){                    
+                    createChatMessage('<img src="'+oFREvent.target.result+'" height="400px" width="500px" />', name, img, moment());
+                    scrollToBottom();
+                    resive = false;
+                    socket.emit('msg', { msg: '<img src="'+oFREvent.target.result+'" height="400px" width="500px" />', user: name, img: img });
+                    
+                }
+                textarea.val("");   
+            };
+        }
     }
 
 
@@ -381,7 +444,7 @@ $(function() {
 
             $("#link").text(window.location.href);
 
-            onConnect.fadeOut(1200, function() {
+            onConnect.fadeOut(1200, function () {
                 inviteSomebody.fadeIn(1200);
             });
         }
@@ -397,8 +460,8 @@ $(function() {
 
         else if (status === "youStartedChatWithNoMessages") {
 
-            left.fadeOut(1200, function() {
-                inviteSomebody.fadeOut(1200, function() {
+            left.fadeOut(1200, function () {
+                inviteSomebody.fadeOut(1200, function () {
                     noMessages.fadeIn(1200);
                     footer.fadeIn(1200);
                 });
@@ -410,7 +473,7 @@ $(function() {
 
         else if (status === "heStartedChatWithNoMessages") {
 
-            personInside.fadeOut(1200, function() {
+            personInside.fadeOut(1200, function () {
                 noMessages.fadeIn(1200);
                 footer.fadeIn(1200);
             });
@@ -443,8 +506,8 @@ $(function() {
     }
 
 });
-function showEmoticons() {
+function showEmoticons(emotic) {
     var content = $("#message").val();
-    content = content + ":d:";
+    content = content + emotic;
     $("#message").val(content);
 }
