@@ -352,8 +352,8 @@ $(function () {
     }
     function checktxtEmotic(context) {
         var result = context;
-        var emotics = [":d:", ":xd:", ":p:", ":c:", ":mmm:", ":dd:"];
-        var directorios = ["risa", "equizde", "burlon", "trizted", "pensar", "yea"];
+        var emotics = [":d:", ":xd:", ":p:", ":c:", ":mmm:", ":dd:",":v:"];
+        var directorios = ["risa", "equizde", "burlon", "trizted", "pensar", "yea","pacman"];
         for (var a = 0; a < emotics.length; a++) {
             if (context.indexOf(emotics[a]) >= 0) {
                 result = context.replace(new RegExp(emotics[a], 'gi'), "<img src='/img/Emoticons/" + directorios[a] + ".png' width='30px' height='30px'/>")
