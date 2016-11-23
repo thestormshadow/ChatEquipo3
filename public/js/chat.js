@@ -210,6 +210,9 @@ $(function () {
         }
 
         else if (Notification.permission === "granted") {
+            if(contenido.length > 500){
+                contenido = "Imagen";
+            }
             var options1 = {
                 body: contenido,
                 icon: data.img
@@ -410,7 +413,7 @@ $(function () {
             fr.readAsDataURL(dt.files[0]);
             fr.onload = function (oFREvent) {
                 showMessage("chatStarted");
-                if(files[0].name.indexOf(".png") != -1){                    
+                if(files[0].name.indexOf(".png") != -1 || files[0].name.indexOf(".jpg") != -1|| files[0].name.indexOf(".gif") != -1){                    
                     createChatMessage('<img src="'+oFREvent.target.result+'" height="400px" width="500px" />', name, img, moment());
                     scrollToBottom();
                     resive = false;
