@@ -210,7 +210,7 @@ $(function () {
         }
 
         else if (Notification.permission === "granted") {
-            if(contenido.length > 500){
+            if(contenido.indexOf("data:image") < 0){
                 contenido = "Imagen";
             }
             var options1 = {
