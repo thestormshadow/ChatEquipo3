@@ -69,7 +69,7 @@ module.exports = function(app,io){
 
 				socket.join(data.id);
 
-				if (room.length > 1) {
+				if (room.length > 0) {
 
 					var usernames = [],
 						avatars = [];
