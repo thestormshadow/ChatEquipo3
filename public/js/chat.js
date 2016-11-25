@@ -354,7 +354,7 @@ $(function () {
         messageTimeSent = $("#timesent" + realident2);
         messageTimeSent.last().text(now.fromNow());
 
-        $('.image' + user.trim())
+        $('.image' + user.replace(" ",""))
             .bind('dragenter', picdragout)
             .bind('dragover', picdragout)
             .bind('drop', droppic);
