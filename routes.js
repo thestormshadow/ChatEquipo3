@@ -58,7 +58,7 @@ module.exports = function(app,io){
 		socket.on('login', function(data) {
 
 			var room = findClientsSocket(io, data.id);
-			if (room.length < 5) {
+			if (room.length < 10) {
 
 				socket.username = data.user;
 				socket.room = data.id;
