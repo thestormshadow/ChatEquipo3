@@ -539,7 +539,10 @@ $(function () {
         }
         else if (status === "allStartedChatWithNoMessages") {
             personInside.fadeOut(1200, function () {
-                footer.fadeIn(1200);
+                inviteSomebody.fadeOut(1200, function () {
+                    noMessages.fadeIn(1200);
+                    footer.fadeIn(1200);
+                });
             });
         }
 
