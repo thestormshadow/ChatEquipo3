@@ -365,7 +365,7 @@ $(function () {
         var directorios = ["risa", "equizde", "burlon", "trizted", "pensar", "yea", "pacman"];
         for (var a = 0; a < emotics.length; a++) {
             if (context.indexOf(emotics[a]) >= 0) {
-                result = context.replace(new RegExp(emotics[a], 'gi'), "<img src='/img/Emoticons/" + directorios[a] + ".png' width='30px' height='30px'/>")
+                result = context.replace(new RegExp(emotics[a], 'gi'), "<img src='/img/Emoticons/" + directorios[a] + ".png' width='30px' height='30px'/>");
             }
         }
         return result;
