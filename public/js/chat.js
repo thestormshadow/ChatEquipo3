@@ -123,16 +123,17 @@ $(function () {
         console.log(data);
         if (data.boolean && data.id == id) {
 
-            chats.empty();
+            //chats.empty();
 
             if (name === data.users[0]) {
-                notifyMe("Información", data.users[1] + " ha entrado del chat.", data);
-                showMessage("youStartedChatWithNoMessages", data);
+                notifyMe("Información", data.users[1] + " ha entrado al chat.", data);
+                //showMessage("youStartedChatWithNoMessages", data);
             }
             else {
 
-                showMessage("heStartedChatWithNoMessages", data);
+                //showMessage("heStartedChatWithNoMessages", data);
             }
+            showMessage("allStartedChatWithNoMessages", data);
 
             chatNickname.text(friend);
         }
@@ -535,6 +536,11 @@ $(function () {
 
             friend = data.users[0];
             noMessagesImage.attr("src", "../img/robot-face.png");
+        }
+        else if (status === "allStartedChatWithNoMessages") {
+            personInside.fadeOut(1200, function () {
+                footer.fadeIn(1200);
+            });
         }
 
         else if (status === "chatStarted") {
