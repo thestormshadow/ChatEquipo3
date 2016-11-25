@@ -73,8 +73,8 @@ $(function () {
                 else {
                     notifyMe("Información.", "Esperando usuario con quien chatear.", data);
                     showMessage("inviteSomebody");
-                    socket.emit('login', { user: name, avatar: email, id: id });
-
+                    socket.emit('login', { user: name, avatar: $("#creatorImage").attr("src"), id: id });
+                    
                 }
 
             });
@@ -105,7 +105,8 @@ $(function () {
                     alert("Correo invalido!");
                 }
                 else {
-                    socket.emit('login', { user: name, avatar: email, id: id });
+                    socket.emit('login', { user: name, avatar: $("#ownerImage").attr("src"), id: id });
+                    
                 }
 
             });
@@ -210,8 +211,11 @@ $(function () {
         }
 
         else if (Notification.permission === "granted") {
-            if(contenido.indexOf("data:image/") != -1){
-                contenido = "Imagen";
+            if (contenido.indexOf("data:image/") != -1) {
+                contenido = "Ha enviado una imagen";
+            }
+            else if (contenido.indexOf("data:application/") != -1) {
+                contenido = "Ha enviado un archivo";
             }
             var options1 = {
                 body: contenido,
@@ -319,11 +323,11 @@ $(function () {
 
             var li = $(
                 '<li class=' + who + '>' +
-                '<div class="image">' +
-                '<img class="imgusr" src=' + imgg + ' />' +
+                '<div class="image"><div class="image' + user.trim() + '">' +
+                '<img class="imgusr myimg" src=' + imgg + ' />' +
                 '<b></b>' +
                 '<i id="timesent' + ident + '" class="timesent" data-time=' + now + '></i> ' +
-                '</div>' +
+                '</div></div>' +
                 '<p id="' + ident + 't"></p>' +
                 '</li>');
 
@@ -349,11 +353,16 @@ $(function () {
         var realident2 = ident - 1;
         messageTimeSent = $("#timesent" + realident2);
         messageTimeSent.last().text(now.fromNow());
+
+        $('.image' + user.trim())
+            .bind('dragenter', picdragout)
+            .bind('dragover', picdragout)
+            .bind('drop', droppic);
     }
     function checktxtEmotic(context) {
         var result = context;
-        var emotics = [":d:", ":xd:", ":p:", ":c:", ":mmm:", ":dd:",":v:"];
-        var directorios = ["risa", "equizde", "burlon", "trizted", "pensar", "yea","pacman"];
+        var emotics = [":d:", ":xd:", ":p:", ":c:", ":mmm:", ":dd:", ":v:"];
+        var directorios = ["risa", "equizde", "burlon", "trizted", "pensar", "yea", "pacman"];
         for (var a = 0; a < emotics.length; a++) {
             if (context.indexOf(emotics[a]) >= 0) {
                 result = context.replace(new RegExp(emotics[a], 'gi'), "<img src='/img/Emoticons/" + directorios[a] + ".png' width='30px' height='30px'/>")
@@ -374,22 +383,53 @@ $(function () {
         $("#message").attr('style', 'border-radius: 2px;border: 1px solid #cccccc;');
     }
 
+    function picdragout(e) {
+        e.originalEvent.stopPropagation();
+        e.originalEvent.preventDefault();
+        $("#message").attr('style', 'border-radius: 2px;border: 1px solid #cccccc;');
+    }
+
     $(document).ready(function () {
         $('#sendFile')
             .bind('dragenter', ignoreDrag)
             .bind('dragover', ignoreDrag)
             .bind('drop', dropFile);
-        $('#alerter')
+        $('.imgcreate')
             .bind('dragenter', ignoreDrag)
             .bind('dragover', ignoreDrag)
             .bind('drop', drop);
-        $('#creatorImage').hover(function () {
-            $('#creatorImage').fadeOut(500, function () {
-                $('#creatorImage').fadeIn(500);
+        $('.imgcreate').hover(function () {
+            $('.imgcreate').fadeOut(500, function () {
+                $('.imgcreate').fadeIn(500);
             });
         });
 
+
     });
+
+    function droppic(e) {
+        ignoreDrag(e);
+        var dt = e.originalEvent.dataTransfer;
+        var files = dt.files;
+        if (dt.files.length == 1) {
+            if (files[0].size <= 180000) {
+                var fr = new FileReader();
+                fr.readAsDataURL(dt.files[0]);
+                fr.onload = function (oFREvent) {
+                    if(oFREvent.target.result != img){
+                        $(".myimg").attr('src', oFREvent.target.result);
+                        img = oFREvent.target.result;
+                        socket.emit('msg', { msg: name+' ha cambiado su foto de perfil', user: "Sistema", img: "/img/robot-face.png" });
+                        //$("#creatorImage").attr('src', oFREvent.target.result);
+                    }                    
+                };
+            }
+            else{
+                alert("El tamaño de la imagen tiene que ser menor a 180 KB");
+            }
+
+        }
+    }
 
     function drop(e) {
         ignoreDrag(e);
@@ -399,7 +439,7 @@ $(function () {
             var fr = new FileReader();
             fr.readAsDataURL(dt.files[0]);
             fr.onload = function (oFREvent) {
-                $("#creatorImage").attr('src', oFREvent.target.result);
+                $(".imgcreate").find("img").attr('src', oFREvent.target.result);
             };
         }
     }
@@ -413,14 +453,20 @@ $(function () {
             fr.readAsDataURL(dt.files[0]);
             fr.onload = function (oFREvent) {
                 showMessage("chatStarted");
-                if(files[0].name.indexOf(".png") != -1 || files[0].name.indexOf(".jpg") != -1|| files[0].name.indexOf(".gif") != -1){                    
-                    createChatMessage('<img src="'+oFREvent.target.result+'" height="400px" width="500px" />', name, img, moment());
+                if (files[0].name.indexOf(".png") != -1 || files[0].name.indexOf(".jpg") != -1 || files[0].name.indexOf(".gif") != -1) {
+                    createChatMessage('<img src="' + oFREvent.target.result + '" height="400px" width="500px" />', name, img, moment());
                     scrollToBottom();
                     resive = false;
-                    socket.emit('msg', { msg: '<img src="'+oFREvent.target.result+'" height="400px" width="500px" />', user: name, img: img });
-                    
+                    socket.emit('msg', { msg: '<img src="' + oFREvent.target.result + '" height="400px" width="500px" />', user: name, img: img });
+
                 }
-                textarea.val("");   
+                else if (files[0].name.indexOf(".txt") != -1 || files[0].name.indexOf(".doc") != -1 || files[0].name.indexOf(".docx") != -1 || files[0].name.indexOf(".pdf") != -1 || files[0].name.indexOf(".pas") != -1 || files[0].name.indexOf(".csv") != -1) {
+                    createChatMessage('<a href="' + oFREvent.target.result + '" download="' + files[0].name + '">Descargar Archivo: "' + files[0].name + '"</a> Tamaño: ' + files[0].size + 'Bytes', name, img, moment());
+                    scrollToBottom();
+                    resive = false;
+                    socket.emit('msg', { msg: '<a href="' + oFREvent.target.result + '" download="' + files[0].name + '">Descargar Archivo: "' + files[0].name + '"</a> Tamaño: ' + files[0].size + 'Bytes', user: name, img: img });
+                }
+                textarea.val("");
             };
         }
     }
@@ -450,6 +496,7 @@ $(function () {
             onConnect.fadeOut(1200, function () {
                 inviteSomebody.fadeIn(1200);
             });
+            $("#creatorImage").attr("src","../img/unnamed.jpg");
         }
 
         else if (status === "personinchat") {
@@ -459,6 +506,7 @@ $(function () {
 
             chatNickname.text(data.user);
             ownerImage.attr("src", data.avatar);
+            $("#ownerImage").attr("src","../img/unnamed.jpg");
         }
 
         else if (status === "youStartedChatWithNoMessages") {
@@ -471,7 +519,7 @@ $(function () {
             });
 
             friend = data.users[1];
-            noMessagesImage.attr("src", data.avatars[1]);
+            noMessagesImage.attr("src", "../img/robot-face.png");
         }
 
         else if (status === "heStartedChatWithNoMessages") {
@@ -482,7 +530,7 @@ $(function () {
             });
 
             friend = data.users[0];
-            noMessagesImage.attr("src", data.avatars[0]);
+            noMessagesImage.attr("src", "../img/robot-face.png");
         }
 
         else if (status === "chatStarted") {
