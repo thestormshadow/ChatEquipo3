@@ -217,6 +217,11 @@ $(function () {
             else if (contenido.indexOf("data:application/") != -1) {
                 contenido = "Ha enviado un archivo";
             }
+
+            if (titulo.indexOf("Información") != -1) {
+                data.img = "/img/robot-face.png";
+            }
+
             var options1 = {
                 body: contenido,
                 icon: data.img

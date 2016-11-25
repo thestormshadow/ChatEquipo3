@@ -39,7 +39,7 @@ module.exports = function(app,io){
 
 				socket.emit('peopleinchat', {number: 0});
 			}
-			else if(room.length >= 3) {
+			else if(room.length >= 10) {
 
 				chat.emit('tooMany', {boolean: true});
 			}
