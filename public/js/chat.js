@@ -394,8 +394,8 @@ $(function () {
             .bind('dragover', ignoreDrag)
             .bind('drop', dropFile);
         $('.imgcreate')
-            .bind('dragenter', ignoreDrag)
-            .bind('dragover', ignoreDrag)
+            .bind('dragenter', picdragout)
+            .bind('dragover', picdragout)
             .bind('drop', drop);
         $('.imgcreate').hover(function () {
             $('.imgcreate').fadeOut(500, function () {
