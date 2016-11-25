@@ -386,7 +386,6 @@ $(function () {
     function picdragout(e) {
         e.originalEvent.stopPropagation();
         e.originalEvent.preventDefault();
-        $("#message").attr('style', 'border-radius: 2px;border: 1px solid #cccccc;');
     }
 
     $(document).ready(function () {
