@@ -323,7 +323,7 @@ $(function () {
 
             var li = $(
                 '<li class=' + who + '>' +
-                '<div class="image"><div class="image' + user.trim() + '">' +
+                '<div class="image"><div class="image' + user.replace(" ","") + '">' +
                 '<img class="imgusr myimg" src=' + imgg + ' />' +
                 '<b></b>' +
                 '<i id="timesent' + ident + '" class="timesent" data-time=' + now + '></i> ' +
