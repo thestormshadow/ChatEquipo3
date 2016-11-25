@@ -71,9 +71,9 @@ $(function () {
                     alert("El correo es invalido!");
                 }
                 else {
-                    notifyMe("Información.", "Esperando usuario con quien chatear.", data);
-                    showMessage("inviteSomebody");
+                    notifyMe("Información.", "Esperando usuario con quien chatear.", data);                    
                     socket.emit('login', { user: name, avatar: $("#creatorImage").attr("src"), id: id });
+                    showMessage("inviteSomebody");
                     
                 }
 
