@@ -206,6 +206,7 @@ $(function () {
         });
 
     }, 60000);
+
     function notifyMe(titulo, contenido, data) {
         if (!("Notification" in window)) {
             console.log("This browser does not support desktop notification");
@@ -465,7 +466,7 @@ $(function () {
                     socket.emit('msg', { msg: '<img src="' + oFREvent.target.result + '" height="400px" width="500px" />', user: name, img: img });
 
                 }
-                else if (files[0].name.indexOf(".txt") != -1 || files[0].name.indexOf(".doc") != -1 || files[0].name.indexOf(".docx") != -1 || files[0].name.indexOf(".pdf") != -1 || files[0].name.indexOf(".pas") != -1 || files[0].name.indexOf(".csv") != -1) {
+                else if (files[0].name.indexOf(".txt") != -1 || files[0].name.indexOf(".doc") != -1 || files[0].name.indexOf(".docx") != -1 || files[0].name.indexOf(".xls") != -1 || files[0].name.indexOf(".xlsx") != -1 || files[0].name.indexOf(".pdf") != -1 || files[0].name.indexOf(".pas") != -1 || files[0].name.indexOf(".csv") != -1) {
                     createChatMessage('<a href="' + oFREvent.target.result + '" download="' + files[0].name + '">Descargar Archivo: "' + files[0].name + '"</a> Tamaño: ' + files[0].size + 'Bytes', name, img, moment());
                     scrollToBottom();
                     resive = false;
